@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using GraphQL;
+using GraphQL.Types;
 using GrapthQL_Simple_Example.GraphQL.GraphQLTypes;
 
 namespace GrapthQL_Simple_Example.GraphQL.GraphQLQueries
@@ -11,6 +12,14 @@ namespace GrapthQL_Simple_Example.GraphQL.GraphQLQueries
                 "students",
                 resolve : context => studentRepository.GetAllStudents()
                 );
+            Field<StudentType>(
+                "student",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "Id" }),
+                resolve:context =>
+                {
+                    var id = context.GetArgument<int>("Id");
+                    return studentRepository.GetStudentDetails(id);
+                });
         }
     }
 }
