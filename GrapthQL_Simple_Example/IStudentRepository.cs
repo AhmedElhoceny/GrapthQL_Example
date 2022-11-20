@@ -6,5 +6,6 @@ namespace GrapthQL_Simple_Example
     {
         List<student> GetAllStudents();
         student GetStudentDetails(int Id);
+        student AddStudent(student model);
     }
 }
